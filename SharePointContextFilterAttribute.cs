@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Web.Mvc;
+using System.Web.Mvc.Filters;
 
 namespace $rootnamespace$
 {
     /// <summary>
-    /// SharePoint action filter attribute.
+    /// SharePoint authentication filter attribute.
     /// </summary>
-    public class SharePointContextFilterAttribute : ActionFilterAttribute
+    public class SharePointContextFilterAttribute : FilterAttribute, IAuthenticationFilter
     {
-        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        public void OnAuthentication(AuthenticationContext filterContext)
         {
             if (filterContext == null)
             {
-                throw new ArgumentNullException("filterContext");
+                throw new ArgumentNullException(nameof(filterContext));
             }
 
             Uri redirectUrl;
             switch (SharePointContextProvider.CheckRedirectionStatus(filterContext.HttpContext, out redirectUrl))
-            {
+        {
                 case RedirectionStatus.Ok:
                     return;
                 case RedirectionStatus.ShouldRedirect:
@@ -27,6 +28,10 @@ namespace $rootnamespace$
                     filterContext.Result = new ViewResult { ViewName = "Error" };
                     break;
             }
+        }
+
+        public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
+        {
         }
     }
 }
