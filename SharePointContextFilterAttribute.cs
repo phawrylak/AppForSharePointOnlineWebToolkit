@@ -18,7 +18,7 @@ namespace $rootnamespace$
 
             Uri redirectUrl;
             switch (SharePointContextProvider.CheckRedirectionStatus(filterContext.HttpContext, out redirectUrl))
-        {
+            {
                 case RedirectionStatus.Ok:
                     return;
                 case RedirectionStatus.ShouldRedirect:
