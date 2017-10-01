@@ -551,7 +551,7 @@ namespace $rootnamespace$
         /// </summary>
         public string ContextToken
         {
-            get { return this.contextTokenObj.ValidTo > DateTime.UtcNow ? this.contextToken : null; }
+            get { return this.contextToken; }
         }
 
         /// <summary>
@@ -559,7 +559,7 @@ namespace $rootnamespace$
         /// </summary>
         public string CacheKey
         {
-            get { return this.contextTokenObj.ValidTo > DateTime.UtcNow ? this.contextTokenObj.CacheKey : null; }
+            get { return this.contextTokenObj.CacheKey; }
         }
 
         /// <summary>
@@ -567,7 +567,7 @@ namespace $rootnamespace$
         /// </summary>
         public string RefreshToken
         {
-            get { return this.contextTokenObj.ValidTo > DateTime.UtcNow ? this.contextTokenObj.RefreshToken : null; }
+            get { return this.contextTokenObj.RefreshToken; }
         }
 
         public override string UserAccessTokenForSPHost
